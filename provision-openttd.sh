@@ -13,6 +13,7 @@ apt-get update -qq
 apt-get upgrade -qq -y
 
 # openttd-data & openttd-opengfx: required to run openttd
+# ufw: firewall
 # other packages: required to clone and compile openttd
 apt install -qq -y -\
   build-essential \
@@ -22,12 +23,24 @@ apt install -qq -y -\
   libsdl1.2-dev \
   openttd-data \
   openttd-opengfx \
+  ufw \
   zlib1g-dev
+
+# -----------------------------------------------------------------------------
+# 2: CREATE OPENTTD USER & CONFIGURE FIREWALL
+# -----------------------------------------------------------------------------
 
 adduser --disabled-password --gecos "" openttd
 
+ufw default deny incoming
+ufw default allow outgoing
+ufw allow ssh
+ufw allow 3979/tcp
+ufw allow 3979/udp
+ufw --force enable
+
 # -----------------------------------------------------------------------------
-# 2: COMPILE OPENTTD
+# 3: COMPILE OPENTTD
 # -----------------------------------------------------------------------------
 
 export REPO_DIR="/home/openttd/openttd-$OPENTTD_VERSION-sources"
@@ -47,7 +60,7 @@ su openttd -c \
   ln -s /usr/share/games/openttd/baseset /home/openttd/.openttd/baseset'
 
 # -----------------------------------------------------------------------------
-# 3: MAKE OPENTTD SYSTEMD SERVICE RUN ON SERVER STARTUP
+# 4: MAKE OPENTTD SYSTEMD SERVICE RUN ON SERVER STARTUP
 # -----------------------------------------------------------------------------
 
 systemctl enable openttd
