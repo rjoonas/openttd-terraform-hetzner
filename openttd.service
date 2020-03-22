@@ -1,0 +1,13 @@
+[Unit]
+Description=OpenTTD
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=openttd
+ExecStart=openttd -D
+
+[Install]
+WantedBy=multi-user.target
