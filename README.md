@@ -1,3 +1,10 @@
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Achtung-orange.svg" width="32" alt="Warning" /> **WARNING:**
+
+Please be extra careful when using Terraform with Hetzner. While developing this module I learned that recreating a server too many times a day can trigger a silent abuse ban which means they will **lock your Hetzner Cloud account without notifying you and delete all your cloud resources within 24 hours. *You will not receive any heads-up about this and there is no appeal process.*** If you want to use Hetzner regardless, your best bet is to iterate configuration on a running server instead of using configuration management tools to create it from scratch. You should still be aware that their abuse prevention algorithm can destroy your servers at any time.
+
+----
+
 <img src="https://raw.githubusercontent.com/OpenTTD/OpenTTD/1.9.3/media/openttd.256.png" alt="OpenTTD" width="128" align="right" />
 
 # openttd-terraform-hetzner
@@ -50,15 +57,5 @@ You can ssh to the server as root with the SSH key you set during provisioning. 
 | `ssh_public_key_path`  | Path to a SSH public key that you want to use for managing the server   |
 | `ssh_private_key_path` | Path to a SSH private key that you want to use for managing the server  |
 | `hetzner_location`     | [Hetzner region to use](server-location) – default is Helsinki, Finland |
-
-## Development
-
-`terraform apply` will ask you interactively for missing variables on each execution. When developing, you will be applying the configuration often so you'll want to read variables from a configuration file instead. Create a **terraform.tfvars** file in the repository root with something like:
-
-```
-hetzner_token        = "your-hetzner-access-token-here"
-ssh_public_key_path  = "~/.ssh/id_hetzner.pub"
-ssh_private_key_path = "~/.ssh/id_hetzner"
-```
 
 [server-location]: https://www.terraform.io/docs/providers/hcloud/r/server.html#location
