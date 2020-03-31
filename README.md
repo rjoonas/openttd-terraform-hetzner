@@ -1,3 +1,6 @@
+**This repo is no longer maintained. Check out [openttd-terraform-upcloud](https://github.com/rjoonas/openttd-terraform-upcloud) for an up-to-date dedicated server example (including annotated openttd.cfg + NewGRF extensions!) using a more reliable cloud provider.**
+
+----
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Achtung-orange.svg" width="32" alt="Warning" /> **WARNING:**
 
